@@ -4,7 +4,10 @@ interface ErrorMessageProps {
 
 export function ErrorMessage({ message }: ErrorMessageProps) {
   return (
-    <div className="p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50">
+    <div
+      data-testid="error-message"
+      className="p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50"
+    >
       <div className="flex items-center">
         <svg
           className="flex-shrink-0 inline w-4 h-4 mr-3"

@@ -10,4 +10,11 @@ export const authApi = {
     const { data } = await api.post<TokenResponse>("/auth/refresh", { token });
     return data;
   },
+  register: async (credentials: LoginCredentials): Promise<TokenResponse> => {
+    const { data } = await api.post<TokenResponse>(
+      "/auth/register",
+      credentials
+    );
+    return data;
+  },
 };
