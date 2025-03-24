@@ -4,9 +4,10 @@ interface FormInputProps {
   id: string;
   label: string;
   type: string;
-  placeholder: string;
+  placeholder?: string;
   registration: UseFormRegisterReturn;
   error?: FieldError;
+  "data-testid"?: string;
 }
 
 export function FormInput({
@@ -16,6 +17,7 @@ export function FormInput({
   placeholder,
   registration,
   error,
+  "data-testid": dataTestId,
 }: FormInputProps) {
   return (
     <div>
@@ -28,9 +30,10 @@ export function FormInput({
       <input
         id={id}
         type={type}
-        className="appearance-none block w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
         placeholder={placeholder}
+        className="block w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
         {...registration}
+        data-testid={dataTestId}
       />
       {error && (
         <p className="mt-2 text-sm font-medium text-red-500 flex items-center">
