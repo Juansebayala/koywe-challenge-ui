@@ -3,11 +3,9 @@ interface ErrorMessageProps {
 }
 
 export function ErrorMessage({ message }: ErrorMessageProps) {
-  const lines = message.split("\n");
-
   return (
     <div className="p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50">
-      <div className="flex items-center mb-2">
+      <div className="flex items-center">
         <svg
           className="flex-shrink-0 inline w-4 h-4 mr-3"
           fill="currentColor"
@@ -20,15 +18,8 @@ export function ErrorMessage({ message }: ErrorMessageProps) {
             clipRule="evenodd"
           ></path>
         </svg>
-        <span className="font-medium">{lines[0]}</span>
+        <span className="font-medium">{message}</span>
       </div>
-      {lines.length > 1 && (
-        <ul className="ml-7 list-disc space-y-1 mt-2">
-          {lines.slice(1).map((line, index) => (
-            <li key={index}>{line}</li>
-          ))}
-        </ul>
-      )}
     </div>
   );
 }
