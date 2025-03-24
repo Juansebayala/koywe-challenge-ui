@@ -6,4 +6,8 @@ export const quoteApi = {
     const { data: response } = await api.post<Quote>("/quote", data);
     return response;
   },
+  getQuote: async (id: string): Promise<Quote> => {
+    const { data: response } = await api.get<Quote>(`/quote/${id}`);
+    return response;
+  },
 };

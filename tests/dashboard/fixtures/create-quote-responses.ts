@@ -1,8 +1,8 @@
-export const mockResponses = {
+export const createQuoteResponses = {
   success: {
     status: 200,
     json: {
-      id: "123",
+      id: "bde35e35-3437-4e1e-93f2-b2c122fe6e4f",
       amount: 100,
       from: "BTC",
       to: "ETH",
