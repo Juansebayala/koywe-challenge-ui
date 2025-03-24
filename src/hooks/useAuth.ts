@@ -2,22 +2,20 @@ import { useMutation } from "@tanstack/react-query";
 import { authApi } from "@/lib/api-client";
 import { LoginFormData } from "@/schemas/login/login-schema";
 import { useRouter } from "next/navigation";
-import { saveToken } from "@/lib/auth-service";
+import { useAuthContext } from "@/contexts/AuthContext";
 import { AxiosError } from "axios";
 import { AuthError } from "@/types/auth";
 import { ErrorMessages } from "@/constants/login/messages";
 
 export const useAuth = () => {
   const router = useRouter();
+  const { login } = useAuthContext();
 
   const loginMutation = useMutation({
     mutationFn: (credentials: LoginFormData) => authApi.login(credentials),
     onSuccess: (data) => {
-      saveToken(data);
+      login(data);
       router.push("/dashboard");
-    },
-    onError: (error) => {
-      console.error("Login error:", error);
     },
   });
 
