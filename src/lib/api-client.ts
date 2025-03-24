@@ -7,7 +7,7 @@ import { LoginCredentials, TokenResponse } from "@/types/auth";
 import { getAuthHeader, getRefreshToken, saveToken } from "./auth-service";
 
 const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL,
+  baseURL: process.env.API_URL,
   headers: {
     "Content-Type": "application/json",
   },
