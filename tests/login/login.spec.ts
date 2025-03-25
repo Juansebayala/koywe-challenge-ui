@@ -4,6 +4,9 @@ import { mockResponses } from "./fixtures/responses";
 
 test.describe("Login Page", () => {
   test.beforeEach(async ({ page }) => {
+    await page.addInitScript(() => {
+      window.IS_TEST_MODE = true;
+    });
     await page.goto("/login");
   });
 
@@ -54,9 +57,9 @@ test.describe("Login Page", () => {
     await page.getByLabel("Password").fill("password123");
     await page.getByRole("button", { name: "Sign in" }).click();
 
-    await expect(
-      page.getByText(ErrorMessages.INVALID_CREDENTIALS)
-    ).toBeVisible();
+    await expect(page.getByTestId("error-message")).toContainText(
+      ErrorMessages.INVALID_CREDENTIALS
+    );
   });
 
   test("should handle API error - Bad Request", async ({ page }) => {
@@ -68,7 +71,9 @@ test.describe("Login Page", () => {
     await page.getByLabel("Password").fill("password123");
     await page.getByRole("button", { name: "Sign in" }).click();
 
-    await expect(page.getByText(ErrorMessages.BAD_REQUEST)).toBeVisible();
+    await expect(page.getByTestId("error-message")).toContainText(
+      ErrorMessages.BAD_REQUEST
+    );
   });
 
   test("should handle API error - Generic error", async ({ page }) => {
@@ -80,7 +85,9 @@ test.describe("Login Page", () => {
     await page.getByLabel("Password").fill("password123");
     await page.getByRole("button", { name: "Sign in" }).click();
 
-    await expect(page.getByText(ErrorMessages.GENERIC_ERROR)).toBeVisible();
+    await expect(page.getByTestId("error-message")).toContainText(
+      ErrorMessages.GENERIC_ERROR
+    );
   });
 
   test("should successfully login and redirect to dashboard", async ({
@@ -93,6 +100,20 @@ test.describe("Login Page", () => {
     await page.getByLabel("Email address").fill("test@example.com");
     await page.getByLabel("Password").fill("password123");
     await page.getByRole("button", { name: "Sign in" }).click();
+
+    await expect(page).toHaveURL("/dashboard");
+  });
+
+  test("should redirect to dashboard if already authenticated", async ({
+    page,
+  }) => {
+    await page.addInitScript(() => {
+      window.localStorage.setItem("access_token", "fake-token");
+      window.localStorage.setItem("refresh_token", "fake-refresh-token");
+      window.localStorage.setItem("user_id", "35889");
+      window.localStorage.setItem("username", "juan@example.com");
+    });
+    await page.goto("/login");
 
     await expect(page).toHaveURL("/dashboard");
   });
