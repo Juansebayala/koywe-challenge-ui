@@ -34,8 +34,6 @@ const CurrencyIcon = ({ currency }: { currency: string }) => {
       return <FaMoneyBillWave className="text-[#6B8E23]" />;
     case Currency.CLP:
       return <FaMoneyBillWave className="text-[#4B0082]" />;
-    case Currency.MXN:
-      return <FaMoneyBillWave className="text-[#006400]" />;
     default:
       return <FaDollarSign className="text-gray-600" />;
   }

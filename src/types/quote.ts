@@ -1,7 +1,6 @@
 export enum Currency {
   ARS = "ARS",
   CLP = "CLP",
-  MXN = "MXN",
   USDC = "USDC",
   BTC = "BTC",
   ETH = "ETH",
