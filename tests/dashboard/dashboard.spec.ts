@@ -6,7 +6,10 @@ import { getQuoteResponses } from "./fixtures/get-quote-responses";
 test.describe("Dashboard Page", () => {
   test.beforeEach(async ({ page }) => {
     await page.addInitScript(() => {
-      window.localStorage.setItem("accessToken", "fake-token");
+      window.localStorage.setItem("access_token", "fake-token");
+      window.localStorage.setItem("refresh_token", "fake-refresh-token");
+      window.localStorage.setItem("user_id", "35889");
+      window.localStorage.setItem("username", "test@example.com");
       window.IS_TEST_MODE = true;
     });
     await page.goto("/dashboard");

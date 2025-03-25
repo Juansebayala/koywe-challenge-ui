@@ -2,26 +2,34 @@
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { loginSchema, type LoginFormData } from "@/schemas/login/login-schema";
-import { useAuth } from "@/hooks/useAuth";
+import {
+  registerSchema,
+  type RegisterFormData,
+} from "@/schemas/register/register-schema";
+import { useRegister } from "@/hooks/useRegister";
 import { FormInput } from "@/components/ui/FormInput";
 import { ErrorMessage } from "@/components/ui/ErrorMessage";
 import { Button } from "@/components/ui/Button";
 import Link from "next/link";
 
-export function LoginForm() {
-  const { login, isLoggingIn, loginError, loginErrorMessage } = useAuth();
+export function RegisterForm() {
+  const {
+    register: registerUser,
+    isRegistering,
+    registerError,
+    registerErrorMessage,
+  } = useRegister();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginFormData>({
-    resolver: zodResolver(loginSchema),
+  } = useForm<RegisterFormData>({
+    resolver: zodResolver(registerSchema),
     mode: "onBlur",
   });
 
-  const onSubmit = (data: LoginFormData) => {
-    login(data);
+  const onSubmit = (data: RegisterFormData) => {
+    registerUser(data);
   };
 
   return (
@@ -50,18 +58,18 @@ export function LoginForm() {
         />
       </div>
 
-      {loginError && loginErrorMessage && (
-        <ErrorMessage message={loginErrorMessage} />
+      {registerError && registerErrorMessage && (
+        <ErrorMessage message={registerErrorMessage} />
       )}
 
-      <Button type="submit" disabled={isLoggingIn}>
-        {isLoggingIn ? "Signing in..." : "Sign in"}
+      <Button type="submit" disabled={isRegistering}>
+        {isRegistering ? "Creating account..." : "Create account"}
       </Button>
 
       <p className="text-center text-sm text-gray-600">
-        Don&apos;t have an account?{" "}
-        <Link href="/register" className="text-blue-600 hover:text-blue-500">
-          Create an account
+        Already have an account?{" "}
+        <Link href="/login" className="text-blue-600 hover:text-blue-500">
+          Sign in
         </Link>
       </p>
     </form>

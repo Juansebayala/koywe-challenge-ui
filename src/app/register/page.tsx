@@ -1,14 +1,14 @@
 "use client";
 
 import { AuthLayout } from "@/components/auth/AuthLayout";
-import { LoginForm } from "@/components/auth/LoginForm";
+import { RegisterForm } from "@/components/auth/RegisterForm";
 import { AuthGuard } from "@/components/auth/AuthGuard";
 
-export default function LoginPage() {
+export default function RegisterPage() {
   return (
     <AuthGuard requireAuth={false}>
-      <AuthLayout title="Welcome to Koywe Quotation App">
-        <LoginForm />
+      <AuthLayout title="Create your account">
+        <RegisterForm />
       </AuthLayout>
     </AuthGuard>
   );

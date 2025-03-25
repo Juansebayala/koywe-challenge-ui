@@ -4,12 +4,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState, useEffect, ReactNode } from "react";
 import { AuthProvider } from "@/contexts/AuthContext";
 
-declare global {
-  interface Window {
-    IS_TEST_MODE?: boolean;
-  }
-}
-
 function QueryProvider({ children }: { children: ReactNode }) {
   const [queryClient] = useState(
     () =>
