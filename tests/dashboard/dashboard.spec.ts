@@ -221,4 +221,36 @@ test.describe("Dashboard Page", () => {
       await expect(page.getByTestId("copy-id-button-copied")).toBeVisible();
     });
   });
+
+  test.describe("Logout", () => {
+    test("should display logout button", async ({ page }) => {
+      await expect(
+        page.getByRole("button", { name: "Sign out" })
+      ).toBeVisible();
+    });
+
+    test("should redirect to login page after logout", async ({ page }) => {
+      await page.getByRole("button", { name: "Sign out" }).click();
+
+      await expect(page).toHaveURL("/login");
+
+      const accessToken = await page.evaluate(() =>
+        window.localStorage.getItem("access_token")
+      );
+      const refreshToken = await page.evaluate(() =>
+        window.localStorage.getItem("refresh_token")
+      );
+      const userId = await page.evaluate(() =>
+        window.localStorage.getItem("user_id")
+      );
+      const username = await page.evaluate(() =>
+        window.localStorage.getItem("username")
+      );
+
+      expect(accessToken).toBeNull();
+      expect(refreshToken).toBeNull();
+      expect(userId).toBeNull();
+      expect(username).toBeNull();
+    });
+  });
 });

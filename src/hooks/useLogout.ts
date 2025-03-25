@@ -7,10 +7,8 @@ export const useLogout = () => {
 
   const handleLogout = () => {
     logout();
-
-    setTimeout(() => {
-      router.push("/login");
-    }, 5000);
+    router.push("/login");
+    router.refresh();
   };
 
   return { handleLogout };
