@@ -6,6 +6,7 @@ import { QuoteSearch } from "@/components/quote/QuoteSearch";
 import { QuoteNavigation } from "@/components/quote/QuoteNavigation";
 import { QuoteTab } from "@/types/quote-tabs";
 import { AuthGuard } from "@/components/auth/AuthGuard";
+import { LogoutButton } from "@/components/auth/LogoutButton";
 
 export default function DashboardPage() {
   const [activeTab, setActiveTab] = useState<QuoteTab>(QuoteTab.CREATE);
@@ -13,7 +14,10 @@ export default function DashboardPage() {
   return (
     <AuthGuard requireAuth={true}>
       <div className="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-md mx-auto">
+        <div className="max-w-md mx-auto relative">
+          <div className="absolute -top-8 right-0">
+            <LogoutButton />
+          </div>
           <div className="bg-white p-8 rounded-xl shadow-lg">
             <QuoteNavigation activeTab={activeTab} onTabChange={setActiveTab} />
 
