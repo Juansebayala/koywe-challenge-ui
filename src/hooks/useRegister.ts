@@ -17,6 +17,7 @@ export const useRegister = () => {
     onSuccess: (data) => {
       login(data);
       router.push("/dashboard");
+      router.refresh();
     },
   });
 

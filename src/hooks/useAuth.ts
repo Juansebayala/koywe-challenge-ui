@@ -16,6 +16,7 @@ export const useAuth = () => {
     onSuccess: (data) => {
       login(data);
       router.push("/dashboard");
+      router.refresh();
     },
   });
 

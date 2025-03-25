@@ -16,8 +16,10 @@ export function AuthGuard({ children, requireAuth = false }: AuthGuardProps) {
   useEffect(() => {
     if (requireAuth && !isAuthenticated) {
       router.push("/login");
+      router.refresh();
     } else if (!requireAuth && isAuthenticated) {
       router.push("/dashboard");
+      router.refresh();
     }
   }, [router, isAuthenticated, requireAuth]);
 
